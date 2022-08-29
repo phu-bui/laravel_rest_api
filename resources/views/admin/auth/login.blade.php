@@ -44,18 +44,29 @@
                                     <form class="user" method="POST" action="{{ route('admin.login') }}">
                                         @csrf
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
+                                            <input type="email" class="form-control form-control-user @error('email') is-invalid @enderror"
                                                 id="email" aria-describedby="emailHelp"
                                                 name="email" value="{{ old('email') }}"
                                                 required autocomplete="email"
                                                 autofocus
-                                                placeholder="Enter Email Address...">
+                                                placeholder="Enter Email Address..."
+                                            >
+                                            @error('email')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
+                                            <input type="password" class="form-control form-control-user @error('password') is-invalid @enderror"
                                                 id="password" placeholder="Password"
                                                 name="password" required autocomplete="current-password"
                                             >
+                                            @error('password')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">

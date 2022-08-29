@@ -76,7 +76,7 @@ class LoginController extends Controller
 
         return $request->wantsJson()
             ? new JsonResponse([], 204)
-            : redirect('/admin');
+            : redirect('/admin/login');
     }
 
     // public function __construct()

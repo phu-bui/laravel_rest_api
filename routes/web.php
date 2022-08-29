@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Post\PostController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,21 +23,16 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-// Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function(){
-//     Route::namespace('Auth')->group(function(){
-//         //login route
-//         Route::get('login', [LoginController::class, 'showLoginForm'])->name('showLogin');
-//         Route::post('login', [LoginController::class, 'login'])->name('login');
-//         //register route
-//         Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('showRegister');
-//         Route::post('register', [RegisterController::class, 'register'])->name('register');
-//     });
+Route::namespace('Post')->prefix('post')->name('post.')->group(function(){
 
-//     Route::get('dashboard', [HomeController::class, 'index'])->name('dashboard');
+    Route::get('/create', [PostController::class, 'create'])->name('createPost');
+    Route::post('/create', [PostController::class, 'store'])->name('storePost');
 
+    Route::get('/', [PostController::class, 'index'])->name('getAll');
+    Route::get('/{id}', [PostController::class, 'show'])->name('getById');
+    Route::delete('/{id}', [PostController::class, 'destroy'])->name('deletePost');
+    
+    Route::get('edit/{id}', [PostController::class, 'edit'])->name('editPost');
+    Route::put('update/{id}', [PostController::class, 'update'])->name('updatePost');
 
-//     Route::post('logout', [LogoutController::class, 'logout'])->name('logout');
-//     Route::get('/', function () {
-//         return view('admin.welcome');
-//     });
-// });
+});

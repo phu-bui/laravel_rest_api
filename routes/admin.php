@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\admin\PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,5 +42,19 @@ Route::namespace('Admin')->name('admin.')->group(function(){
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
     Route::get('/', function () {
         return view('admin.welcome');
+    });
+
+    Route::namespace('Post')->middleware('admin')->prefix('post')->group(function(){
+
+        Route::get('/create', [PostController::class, 'create'])->name('createPost');
+        Route::post('/create', [PostController::class, 'store'])->name('storePost');
+    
+        Route::get('/', [PostController::class, 'index'])->name('getAllPost');
+        Route::get('/{id}', [PostController::class, 'show'])->name('getPostById');
+        Route::get('/delete/{id}', [PostController::class, 'destroy'])->name('deletePost');
+        
+        Route::get('edit/{id}', [PostController::class, 'edit'])->name('editPost');
+        Route::put('update/{id}', [PostController::class, 'update'])->name('updatePost');
+    
     });
 });
