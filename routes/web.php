@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Auth\GoogleSocialiteController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Post\PostController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -18,6 +20,9 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/redirect', [GoogleSocialiteController::class, 'redirectToProvider'])->middleware('guest')->name('loginGoogle');
+Route::get('/callback', [GoogleSocialiteController::class, 'handleProviderCallback']);
 
 Auth::routes();
 
