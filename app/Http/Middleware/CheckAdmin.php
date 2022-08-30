@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CheckAdmin
 {
@@ -14,11 +15,15 @@ class CheckAdmin
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next, ...$guards)
     {
-        $role = $request->user()->roles()->get()[0]['role_name'];
-        if($role == 'admin'){
-            return $next($request);
+        $guards = empty($guards) ? [null] : $guards;
+        foreach ($guards as $guard) {
+            if (Auth::guard($guard)->check()) {
+                if($guard == 'admin'){
+                    return $next($request);
+                }
+            }
         }
         return response('Ban khong co quyen');
     }

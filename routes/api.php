@@ -24,16 +24,10 @@ Route::prefix('/v1')->middleware('auth:api')->group(function () {
    Route::delete('/user/{id}', [UserAuthController::class , 'delete']);
 });
 
-Route::namespace('Post')->prefix('post')->name('post.')->group(function(){
-
-   Route::get('/create', [PostController::class, 'create'])->name('createPost');
-   Route::post('/create', [PostController::class, 'store'])->name('storePost');
-
+Route::namespace('Post')->middleware('auth:api')->prefix('post')->name('post.')->group(function(){
+   Route::post('/create', [PostController::class, 'store'])->name('storePost')->middleware('checkUser');
    Route::get('/', [PostController::class, 'index'])->name('getAll');
    Route::get('/{id}', [PostController::class, 'show'])->name('getById');
    Route::delete('/{id}', [PostController::class, 'destroy'])->name('deletePost');
-   
-   Route::get('edit/{id}', [PostController::class, 'edit'])->name('editPost');
-   Route::put('update/{id}', [PostController::class, 'update'])->name('updatePost');
-
+   Route::put('update/{id}', [PostController::class, 'update'])->name('updatePost')->middleware('checkUser');
 });

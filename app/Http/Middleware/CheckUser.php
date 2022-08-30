@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Middleware;
-
+use Illuminate\Support\Facades\Auth;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -14,12 +14,11 @@ class CheckUser
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next)
+    public function handle(Request $request, Closure $next, ...$guards)
     {
-        $role = $request->user()->roles()->get()[0]['role_name'];
-        if($role == 'user'){
+        if (Auth::guard()->check()) {
             return $next($request);
         }
-        return response("ban khong co quyen");
+        return response('Ban khong co quyen');
     }
 }

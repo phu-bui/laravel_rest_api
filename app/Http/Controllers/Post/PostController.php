@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Repositories\PostRepository;
+use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 
 class PostController extends Controller
 {
@@ -27,7 +29,7 @@ class PostController extends Controller
     {
         //
         $posts = $this->model->getAllPost();
-        return response()->json($posts);
+        return view('home', ['posts' => $posts]);
     }
 
     /**
@@ -38,6 +40,7 @@ class PostController extends Controller
     public function create()
     {
         //
+        return view('createPost');
     }
 
     /**
@@ -46,10 +49,11 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
         //
         $this->model->createPost($request);
+        return redirect()->route('home');    
     }
 
     /**
@@ -62,7 +66,7 @@ class PostController extends Controller
     {
         //
         $post = $this->model->getPostById($id);
-        return response()->json($post);
+        return view('post', ['post' => $post]);
     }
 
     /**
@@ -74,6 +78,7 @@ class PostController extends Controller
     public function edit($id)
     {
         //
+        return view('editPost', ['id' => $id]);
     }
 
     /**
@@ -83,10 +88,11 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id, Request $request)
+    public function update($id, UpdatePostRequest $request)
     {
         //
         $this->model->updatePost($id, $request);
+        return redirect()->route('home');
     }
 
     /**
@@ -99,5 +105,6 @@ class PostController extends Controller
     {
         //
         $this->model->deletePost($id);
+        return redirect()->route('home');
     }
 }
