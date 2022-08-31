@@ -21,12 +21,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/redirect', [GoogleSocialiteController::class, 'redirectToProvider'])->middleware('guest')->name('loginGoogle');
+Route::get('/redirect', [GoogleSocialiteController::class, 'redirectToProvider'])->name('loginGoogle');
 Route::get('/callback', [GoogleSocialiteController::class, 'handleProviderCallback']);
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
-Route::get('/home', [PostController::class, 'index'])->name('home');
+Route::get('/home', [PostController::class, 'index'])->name('home')->middleware('verified');
 Route::get('/create', [PostController::class, 'create'])->middleware('auth')->name('post.createPost');
 
 Route::namespace('Post')->prefix('post')->name('post.')->group(function(){

@@ -22,7 +22,7 @@
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                     <input type="text" class="form-control form-control-user @error('title') is-invalid @enderror"
-                                        id="title" placeholder="Title" name="title"
+                                        id="title" placeholder="{{$post->title}}" name="title"
                                     >
                                 </div>
                                 @error('title')
@@ -32,7 +32,7 @@
                                 @enderror
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control form-control-user @error('body') is-invalid @enderror"
-                                        id="body" placeholder="Body" name="body">
+                                        id="body" placeholder="{{$post->body}}" name="body">
                                 </div>
                                 @error('body')
                                     <span class="invalid-feedback" role="alert">

@@ -3,13 +3,12 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StorePostRequest;
-use App\Http\Requests\UpdatePostRequest;
 use Illuminate\Http\Request;
-use App\Models\Post;
-use App\Repositories\PostRepository;
+use App\Models\User;
+use App\Repositories\UserRepository;
+use Mail;
 
-class PostController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,17 +18,17 @@ class PostController extends Controller
 
     protected $model;
 
-    public function __construct(Post $post)
+    public function __construct(User $user)
     {
        // set the model
-       $this->model = new PostRepository($post);
+       $this->model = new UserRepository($user);
     }
 
     public function index()
     {
         //
-        $posts = $this->model->getAllPost();
-        return view('admin.post.postList', ['posts' => $posts]);
+        $users = $this->model->getAllUser();
+        return view('admin.auth.userList', ['users' => $users]);
     }
 
     /**
@@ -40,7 +39,6 @@ class PostController extends Controller
     public function create()
     {
         //
-        return view('admin.post.postCreate');
     }
 
     /**
@@ -49,11 +47,9 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorePostRequest $request)
+    public function store(Request $request)
     {
         //
-        $this->model->createPost($request);
-        return redirect()->route('admin.getAllPost');
     }
 
     /**
@@ -65,8 +61,6 @@ class PostController extends Controller
     public function show($id)
     {
         //
-        $post = $this->model->getPostById($id);
-        return response()->json($post);
     }
 
     /**
@@ -78,8 +72,6 @@ class PostController extends Controller
     public function edit($id)
     {
         //
-        $post = $this->model->getPostById($id);
-        return view('admin.post.postEdit', ['id' => $id, 'post' => $post]);
     }
 
     /**
@@ -89,11 +81,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update($id, UpdatePostRequest $request)
+    public function update(Request $request, $id)
     {
         //
-        $this->model->updatePost($id, $request);
-        return redirect()->route('admin.getAllPost');
     }
 
     /**
@@ -105,7 +95,5 @@ class PostController extends Controller
     public function destroy($id)
     {
         //
-        $this->model->deletePost($id);
-        return redirect()->route('admin.getAllPost');
     }
 }

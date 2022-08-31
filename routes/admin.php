@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\admin\PostController;
+use App\Http\Controllers\admin\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,33 +19,32 @@ use App\Http\Controllers\admin\PostController;
 */
 
 //Admin
-Route::namespace('Admin')->name('admin.')->group(function(){
-    Route::namespace('Auth')->middleware('guest:admin')->group(function(){
+
+Route::namespace('Admin')->name('admin.')->middleware('guest:admin')->group(function(){
+
         //login route
         Route::get('login', [LoginController::class, 'showLoginForm'])->name('showLogin');
         Route::post('login', [LoginController::class, 'login'])->name('login');
         //register route
         Route::get('register', [RegisterController::class, 'showRegistrationForm'])->name('showRegister');
         Route::post('register', [RegisterController::class, 'register'])->name('register');
+});
+
+Route::namespace('Admin')->name('admin.')->middleware('admin')->group(function(){
         
-    //     Route::middleware('admin')->group(function(){
-    //         Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    //     });
-    });
-    Route::middleware('admin')->group(function(){
-            Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-        });
-    
-    // Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
-
-
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::post('logout', [LoginController::class, 'logout'])->name('logout');
+
     Route::get('/', function () {
         return view('admin.welcome');
     });
 
-    Route::namespace('Post')->middleware('admin')->prefix('post')->group(function(){
+    Route::namespace('Auth')->prefix('user')->group(function(){
+        Route::get('/', [UserController::class, 'index'])->name('getAllUser');
+        Route::get('/sendmail/{email}', [UserController::class, 'sendMail'])->name('sendMail');
+    });
+
+    Route::namespace('Post')->prefix('post')->group(function(){
 
         Route::get('/create', [PostController::class, 'create'])->name('createPost');
         Route::post('/create', [PostController::class, 'store'])->name('storePost');

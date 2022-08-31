@@ -16,7 +16,6 @@ class BaseRepository
     // Get all instances of model
     public function all()
     {
-        dd($this->model);
         return $this->model->all();
     }
 
