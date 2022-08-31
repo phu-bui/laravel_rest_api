@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\admin\NotificationController;
 use App\Http\Controllers\admin\PostController;
 use App\Http\Controllers\admin\UserController;
 
@@ -56,5 +57,10 @@ Route::namespace('Admin')->name('admin.')->middleware('admin')->group(function()
         Route::get('edit/{id}', [PostController::class, 'edit'])->name('editPost');
         Route::put('update/{id}', [PostController::class, 'update'])->name('updatePost');
     
+    });
+
+    //Notification
+    Route::namespace('Notification')->prefix('notification')->group(function(){
+        Route::get('/send', [NotificationController::class, 'send'])->name('sendNotification');
     });
 });
