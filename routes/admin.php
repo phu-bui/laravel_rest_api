@@ -5,8 +5,10 @@ use App\Http\Controllers\Admin\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\admin\NotificationController;
+use App\Http\Controllers\admin\NotiTemplateController;
 use App\Http\Controllers\admin\PostController;
 use App\Http\Controllers\admin\UserController;
+use App\Models\NotiTemplate;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,6 +63,17 @@ Route::namespace('Admin')->name('admin.')->middleware('admin')->group(function()
 
     //Notification
     Route::namespace('Notification')->prefix('notification')->group(function(){
-        Route::get('/send', [NotificationController::class, 'send'])->name('sendNotification');
+        Route::get('send/{email}', [NotificationController::class, 'send'])->name('sendNotification');
+    });
+
+    Route::namespace('Noti Template')->prefix('noti-template')->group(function(){
+        Route::get('/', [NotiTemplateController::class, 'index'])->name('getAllNotiTemplate');
+        Route::get('/create', [NotiTemplateController::class, 'create'])->name('createNotiTemplate');
+        Route::post('/create', [NotiTemplateController::class, 'store'])->name('storeNotiTemplate');
+
+        Route::get('edit/{id}', [NotiTemplateController::class, 'edit'])->name('editNotiTemplate');
+        Route::put('update/{id}', [NotiTemplateController::class, 'update'])->name('updateNotiTemplate');
+
+        Route::get('/delete/{id}', [NotiTemplateController::class, 'destroy'])->name('deleteNotiTemplate');
     });
 });

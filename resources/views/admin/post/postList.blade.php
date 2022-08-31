@@ -34,7 +34,7 @@
                                 <span class="icon text-white-50">
                                     <i class="fas fa-info-circle"></i>
                                 </span>
-                                <span class="text">View</span>
+                                <span class="text">Edit</span>
                             </a>
                             <a href="{{route('admin.deletePost', array('id'=>$post->id))}}" onclick="return confirm('Are you sure you want to delete this post?')" class="btn btn-danger btn-icon-split">
                                 <span class="icon text-white-50">

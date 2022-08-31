@@ -60,5 +60,21 @@
     </div>
 </li>
 
+<!-- Nav Item - Pages Collapse Menu -->
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
+        aria-expanded="true" aria-controls="collapsePages">
+        <i class="fas fa-fw fa-cog"></i>
+        <span>Noti Template</span>
+    </a>
+    <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Template:</h6>
+            <a class="collapse-item" href="{{ route('admin.getAllNotiTemplate') }}">Template List</a>
+            <a class="collapse-item" href="{{ route('admin.createNotiTemplate') }}">Add Template</a>
+        </div>
+    </div>
+</li>
+
 </ul>
 <!-- End of Sidebar -->

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Notifications\EmailNotification;
 use App\Mail\DbTemplateMail;
+use App\Models\NotiTemplate;
 use App\Models\User;
 use Mail;
 
@@ -29,23 +30,11 @@ class NotificationController extends Controller
     //     dd('Notification sent!');
     // }
 
-    public function send(){
+    public function send($email){
         // Query the required template
-        $user = User::first();
-        $template = "<!DOCTYPE html>
-        <html>
-        <head>
-            <title>StartBlog.com</title>
-        </head>
-        <body>
-            <h1>Modyfi</h1>
-            <p>Body</p>
-            
-            <p>Thank you</p>
-        </body>
-        </html>
-        "; 
-        Mail::to($user->email)->send(new DbTemplateMail($template));
-        dd("Email is Sent.");
+        $noti_template = NotiTemplate::first();
+        $template = $noti_template->template;
+        Mail::to($email)->send(new DbTemplateMail($template));
+        return back()->withInput();
     }
 }

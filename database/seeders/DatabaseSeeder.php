@@ -16,9 +16,21 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        \App\Models\NotiTemplate::factory()->create([
+            'type' => 'Noti A',
+            'template' => "<!DOCTYPE html>
+        <html>
+        <head>
+            <title>StartBlog.com</title>
+        </head>
+        <body>
+            <h1>Modyfi</h1>
+            <p>Body</p>
+            
+            <p>Thank you</p>
+        </body>
+        </html>
+        ",
+        ]);
     }
 }
