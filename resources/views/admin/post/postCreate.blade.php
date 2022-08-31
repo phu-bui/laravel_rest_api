@@ -19,24 +19,30 @@
                     <form class="user" method="POST" action="{{ route('admin.storePost') }}">
                         {{csrf_field()}}
                         <div class="form-group row">
+                            <label for="title" class="col-md-4 col-form-label text-md-end">{{ __('Post Title') }}</label>
+
                             <div class="col-sm-6 mb-3 mb-sm-0">
                                 <input type="text" class="form-control form-control-user @error('title') is-invalid @enderror"
-                                    id="title" placeholder="Title" name="title">
+                                    id="title" placeholder="Title" name="title" value="{{ old('title') }}">
+                                    @error('title')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                             </div>
-                            @error('title')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="body" class="col-md-4 col-form-label text-md-end">{{ __('Post Body') }}</label>
                             <div class="col-sm-6">
                                 <input type="text" class="form-control form-control-user @error('body') is-invalid @enderror"
-                                    id="body" placeholder="Body" name="body">
+                                    id="body" placeholder="Body" name="body" value="{{ old('body') }}">
+                                    @error('body')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                             </div>
-                            @error('body')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>
                         <button class="btn btn-primary btn-user btn-block">
                             Save

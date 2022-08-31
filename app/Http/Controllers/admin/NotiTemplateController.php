@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreNotiTemplateRequest;
+use App\Http\Requests\UpdateNotiTemplateRequest;
 use Illuminate\Http\Request;
 use App\Models\NotiTemplate;
 use App\Repositories\NotiTemplateRepository;
@@ -47,7 +49,7 @@ class NotiTemplateController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreNotiTemplateRequest $request)
     {
         //
         $this->model->createNotiTemplate($request);
@@ -88,7 +90,7 @@ class NotiTemplateController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateNotiTemplateRequest $request, $id)
     {
         //
         $this->model->updateNotiTemplate($id, $request);

@@ -22,23 +22,24 @@
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                     <input type="text" class="form-control form-control-user @error('type') is-invalid @enderror"
-                                        id="type" placeholder="{{$noti_template->type}}" name="type"
+                                        id="type" placeholder="{{$noti_template->type}}" name="type" value="{{ old('type') }}"
                                     >
-                                </div>
-                                @error('title')
+                                    @error('type')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror
+                                    @enderror
+                                </div>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control form-control-user @error('body') is-invalid @enderror"
-                                        id="template" placeholder="{{$noti_template->template}}" name="template">
+                                    <input type="text" class="form-control form-control-user @error('template') is-invalid @enderror"
+                                        id="template" placeholder="{{$noti_template->template}}" name="template" value="{{ old('teplate') }}"
+                                    >
+                                        @error('template')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                                 </div>
-                                @error('body')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                             </div>
                         
                             <button class="btn btn-primary btn-user btn-block">

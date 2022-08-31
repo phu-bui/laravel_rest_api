@@ -20,23 +20,23 @@
                         {{csrf_field()}}
                         <div class="form-group row">
                             <div class="col-sm-6 mb-3 mb-sm-0">
-                                <input type="text" class="form-control form-control-user @error('title') is-invalid @enderror"
-                                    id="type" placeholder="Type" name="type">
+                                <input type="text" class="form-control form-control-user @error('type') is-invalid @enderror"
+                                    id="type" placeholder="Type" name="type" value="{{ old('type') }}">
+                                    @error('type')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                             </div>
-                            @error('title')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                             <div class="col-sm-6">
-                                <input type="text" class="form-control form-control-user @error('body') is-invalid @enderror"
-                                    id="template" placeholder="Template" name="template">
+                                <input type="text" class="form-control form-control-user @error('template') is-invalid @enderror"
+                                    id="template" placeholder="Template" name="template" value="{{ old('template') }}">
+                                    @error('template')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                             </div>
-                            @error('body')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
                         </div>
                         <button class="btn btn-primary btn-user btn-block">
                             Save

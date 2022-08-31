@@ -22,23 +22,25 @@
                             <div class="form-group row">
                                 <div class="col-sm-6 mb-3 mb-sm-0">
                                     <input type="text" class="form-control form-control-user @error('title') is-invalid @enderror"
-                                        id="title" placeholder="{{$post->title}}" name="title"
+                                        id="title" placeholder="{{$post->title}}" name="title" value="{{ old('title') }}"
                                     >
-                                </div>
-                                @error('title')
+                                    @error('title')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror
+                                    @enderror
+                                </div>
+                         
                                 <div class="col-sm-6">
                                     <input type="text" class="form-control form-control-user @error('body') is-invalid @enderror"
-                                        id="body" placeholder="{{$post->body}}" name="body">
-                                </div>
-                                @error('body')
+                                        id="body" placeholder="{{$post->body}}" name="body" value="{{ old('body') }}"
+                                    >
+                                    @error('body')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
-                                @enderror
+                                    @enderror
+                                </div>
                             </div>
                         
                             <button class="btn btn-primary btn-user btn-block">
