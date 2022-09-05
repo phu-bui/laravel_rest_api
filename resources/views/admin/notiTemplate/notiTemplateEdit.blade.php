@@ -31,14 +31,15 @@
                                     @enderror
                                 </div>
                                 <div class="col-sm-6">
-                                    <input type="text" class="form-control form-control-user @error('template') is-invalid @enderror"
-                                        id="template" placeholder="{{$noti_template->template}}" name="template" value="{{ old('teplate') }}"
+                                    <textarea class="form-control form-control-user @error('template') is-invalid @enderror"
+                                    name="template" id="template" value="{{ old('template') }}"
                                     >
-                                        @error('template')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
+                                    </textarea>
+                                    @error('template')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
                             </div>
                         

@@ -32,7 +32,7 @@ class NotificationController extends Controller
 
     public function send($email){
         // Query the required template
-        $noti_template = NotiTemplate::first();
+        $noti_template = NotiTemplate::where('id', 4)->first();
         $template = $noti_template->template;
         Mail::to($email)->send(new DbTemplateMail($template));
         return back()->withInput();

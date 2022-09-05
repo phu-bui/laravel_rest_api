@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Post\PostController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,8 +27,11 @@ Route::get('/callback', [GoogleSocialiteController::class, 'handleProviderCallba
 
 Auth::routes(['verify' => true]);
 
-Route::get('/home', [PostController::class, 'index'])->name('home')->middleware('verified');
-Route::get('/create', [PostController::class, 'create'])->middleware('auth')->name('post.createPost');
+Route::group(['middleware' => 'localization'], function () {
+    Route::get('/home', [PostController::class, 'index'])->name('home')->middleware('verified');
+    Route::get('/create', [PostController::class, 'create'])->middleware('auth')->name('post.createPost');
+    Route::get('change-language/{language}', [HomeController::class, 'changeLanguage'])->name('change-language');
+});
 
 Route::namespace('Post')->prefix('post')->name('post.')->group(function(){
     Route::get('/{id}', [PostController::class, 'show'])->name('getById');

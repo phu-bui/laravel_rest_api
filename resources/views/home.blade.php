@@ -12,7 +12,7 @@
                 </a>
                 <p class="post-meta">
                     Posted by
-                    <a href="#!">Start Bootstrap</a>
+                    <a href="#!">{{__('startbootstrap')}}</a>   
                     on September 24, 2022
                 </p>
             </div>
@@ -20,7 +20,7 @@
             <hr class="my-4" />
             @endforeach
             <!-- Pager-->
-            <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="{{ route('post.createPost') }}">Create new post →</a></div>
+            <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="{{ route('post.createPost') }}">{{__('CREATEPOST')}} →</a></div>
         </div>
     </div>
 </div>

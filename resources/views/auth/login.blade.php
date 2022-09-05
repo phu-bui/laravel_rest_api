@@ -51,7 +51,7 @@
                                                 autofocus
                                                 placeholder="Enter Email Address..."
                                             >
-                                            @error('password')
+                                            @error('email')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -62,7 +62,7 @@
                                                 id="password" placeholder="Password"
                                                 name="password" required autocomplete="current-password"
                                             >
-                                            @error('email')
+                                            @error('password')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
